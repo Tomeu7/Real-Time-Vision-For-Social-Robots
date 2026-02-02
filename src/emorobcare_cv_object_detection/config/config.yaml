@@ -1,0 +1,20 @@
+{
+  camera_type: usb_cam, # options: usb_cam, realsense
+  tf_reference_frame: "camera_color_optical_frame", # TF reference frame for object transforms (map, odom, base_link, or camera frame)
+  yolo_model_path: "best_v5.pt",
+  score_threshold: 0.5,
+  yolo_device: 'cuda:0',
+  processing_rate: 10,  # Best effort frequency for processing input images (Hz)
+  # for jetson deactivate draw_image
+  draw_image: false,
+  # others
+  use_depth: false,  # Use depth information for TF positioning (false = fixed distance with 2D pixel mapping)
+  use_trigger_service: false,  # If true, model loads/unloads via start_detection/stop_detection services; if false, model loads on startup (default)
+  # Human_radar, for jetson deactivate it
+  use_human_radar: false,
+  # KB, for jetson activate it
+  use_knowledge_base: false,
+  ADD_THRESHOLD: 0.5,  # must appear in at least percentage of frames
+  REMOVE_THRESHOLD: 0.02,   # must disappear in percentage of frames,
+  N_kb_object_detection: 30 # length of history for add and remove
+}

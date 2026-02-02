@@ -1,0 +1,12 @@
+{
+  camera_type: usb_cam, # options: usb_cam, realsense
+  # for jetson, deavtivate human radar, intersect with objects and activate draw_image
+  use_depth: False,
+  draw_image: True,
+  # Human radar
+  use_human_radar: False,
+  intersect_with_objects: False,
+  N_kb_pointing: 15,  # frames to log
+  ADD_THRESHOLD_POINTING: 0.8,
+  REMOVE_THRESHOLD_POINTING: 0.05
+}

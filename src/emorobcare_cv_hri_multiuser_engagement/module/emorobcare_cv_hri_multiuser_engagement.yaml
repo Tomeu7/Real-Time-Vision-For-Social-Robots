@@ -1,0 +1,2 @@
+emorobcare_cv_hri_multiuser_engagement:
+  launch: "emorobcare_cv_hri_multiuser_engagement emorobcare_cv_hri_multiuser_engagement.launch.py"

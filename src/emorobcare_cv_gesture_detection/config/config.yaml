@@ -1,0 +1,6 @@
+{
+  camera_type: usb_cam, # options: usb_cam, realsense
+  max_num_hands: 2,
+  only_detect_right_hand: true,
+  processing_rate: 10 # Best effort frequency for processing input images (Hz)
+}

@@ -1,0 +1,11 @@
+/hri_multiuser_engagement/add_analyzer_node:
+  ros__parameters:
+    path: Diagnostics
+    social_perception:
+      type: 'diagnostic_aggregator/AnalyzerGroup'
+      path: "Social perception"
+      analyzers:
+        interaction:
+          type: diagnostic_aggregator/GenericAnalyzer
+          path: "Engagement"
+          find_and_remove_prefix: ["/social_perception/engagement"]

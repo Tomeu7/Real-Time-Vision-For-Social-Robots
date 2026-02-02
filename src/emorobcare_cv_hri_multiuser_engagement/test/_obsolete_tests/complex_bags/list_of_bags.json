@@ -1,0 +1,70 @@
+{
+    "single_person":
+    {
+      "engaged": {
+          "person_id": [
+            "rorql",
+            "rorql",
+            "aqfwx",
+            "aqfwx",
+            "dndaq",
+            "dndaq"
+          ],
+          "expected_result": "3",
+          "rosbag": [
+            "1p_AA_eng_1.bag",
+            "1p_AA_eng_2.bag",
+            "1p_FV_eng_1.bag",
+            "1p_FV_eng_2.bag",
+            "1p_GA_eng_1.bag",
+            "1p_GA_eng_2.bag"
+          ]
+      },
+      "disengaged": {
+          "person_id": [
+            "rorql",
+            "rorql",
+            "aqfwx",
+            "aqfwx",
+            "dndaq",
+            "dndaq"
+          ],
+          "expected_result": "1",
+          "rosbag": [
+            "1p_AA_dis_1.bag",
+            "1p_AA_dis_2.bag",
+            "1p_FV_dis_1.bag",
+            "1p_FV_dis_2.bag",
+            "1p_GA_dis_1.bag",
+            "1p_GA_dis_2.bag"
+          ]
+      }
+    },
+  
+    "multi_person": {
+      "engaged": {
+          "person_id": [
+            ["eloek", "ghfbv"],
+            ["eloek", "ghfbv"]
+          ],
+          "expected_result": "3",
+          "rosbag": [
+            "2p_AA_FV_eng_1.bag",
+            "2p_AA_FV_eng_2.bag"
+          ]
+      },
+      "disengaged": {
+          "person_id": [
+            ["eloek", "ghfbv"],
+            ["eloek", "ghfbv"]
+          ],
+          "expected_result": "1",
+          "rosbag": [
+            "2p_AA_FV_dis_1.bag",
+            "2p_AA_FV_dis_2.bag"
+          ]
+      }
+    }
+  }
+  
+  

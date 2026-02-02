@@ -1,0 +1,24 @@
+/emorobcare_cv_hri_multiuser_engagement:
+  ros__parameters:
+    reference_frame: "sellion_link" # the robot's reference point, used to compute the distance and mutual gaze. Should be aligned with the robot's gaze direction
+    max_distance: 4.0 # meters. people further away than `max_distance` are automatically set to be DISENGAGED
+    field_of_view: 65.0 # degrees. Half-field of 'attention' for humans. If the target is outside this field, engagement is not detected.
+    robot_field_of_view: 40.0 # degrees. Half-field of 'attention' for the robot camera. Can be different from human field_of_view.
+    tablet_field_of_view: 50.0
+    robot_engagement_threshold: 0.6 # threshold for robot engagement. Set higher to compensate for better detection due to camera alignment.
+    person_engagement_threshold: 0.3 # threshold for person-to-person engagement. Set lower to compensate for side-angle detection difficulties.
+    tablet_engagement_threshold: 0.5 # threshold for person-to-tablet engagement. Set moderately to detect when people are actively looking at the tablet.
+    use_relative_engagement: true # if true, uses relative comparison between targets (picks highest score). If false, uses absolute thresholds.
+    engagement_mode: 'absolute' # Engagement computation mode: 'absolute' - use target-specific thresholds directly, 'relative' - normalize scores relative to other targets, 'winner' - pick the target with highest raw score
+    min_engagement_score: 0.3 # minimum raw engagement score required for any target to be considered (prevents engagement with very low scores).
+    observation_window: 5. # seconds. The time window used to compute the engagement level of a person. The higher the value, the more stable the engagement level will be.
+    rate: 10. # Hz. The rate at which the engagement level is computed and published.
+    debug_mode: true # Enable detailed debug logging and geometry message publishing. Set to true for development/debugging.
+    skip_anonymous_engagement: true # Skip person-to-person engagement computation for persons labeled as "anonymous"
+    person2person_engagement_enabled: true # Enable person-to-person engagement computation
+    person2robot_engagement_enabled: true # Enable person-to-robot engagement computation
+    person2tablet_engagement_enabled: true # Enable person-to-tablet engagement computation
+
+
+
+
