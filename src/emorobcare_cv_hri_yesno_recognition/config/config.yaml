@@ -1,0 +1,58 @@
+# Jetson config for ROS2 yes/no node
+# Uses automatic backend selection: MEDIAPIPE (many landmarks) vs YUNET (5 keypoints) vs ROI fallback
+
+camera_type: usb_cam   # options: usb_cam, realsense
+
+# ------------------------------------------------------------
+# Core gesture detection parameters
+# ------------------------------------------------------------
+history_length: 40
+
+# ROI thresholds (used when backend is UNKNOWN or as ALT debug)
+yes_threshold_y: 20
+no_threshold_x: 20
+
+# Detection thresholds
+ratio_threshold: 2.5
+yes_threshold_span_change: 0.12
+no_threshold_span_change: 0.08
+
+# Robustness checks
+enable_center_crossing: true
+min_crossings: 1
+
+# Center crossing method: "first_point" or "median"
+center_crossing_method: "first_point"
+
+enable_oscillation_check: true
+min_oscillations: 2
+
+# Cooldown between detections (seconds; 0 disables)
+gesture_cooldown: 2.0
+
+# ------------------------------------------------------------
+# Debug / visualisation
+# ------------------------------------------------------------
+debug: false
+debug_topic: /head_gesture/debug_image
+
+gesture_display_duration: 2.0
+clear_history_on_detection: true
+
+# Logging throttling
+metrics_log_period: 1.0
+
+# Periodic logger: shows how many faces are MEDIAPIPE vs YUNET vs UNKNOWN
+backend_log_period: 5.0
+
+# ------------------------------------------------------------
+# Timestamp validation (for stuttering feeds)
+# ------------------------------------------------------------
+enable_timestamp_check: false
+max_frame_interval: 0.5
+min_valid_frames: 12
+
+# ------------------------------------------------------------
+# ROS-only features
+# ------------------------------------------------------------
+publish_heartbeat: false
