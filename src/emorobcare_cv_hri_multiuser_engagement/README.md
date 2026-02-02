@@ -1,6 +1,6 @@
 # Multi-User Engagement Detection
 
-A ROS2 node for detecting and tracking visual social engagement between a robot and multiple persons, as well as engagement between persons themselves.
+A ROS2 node for detecting and tracking visual social engagement between a robot and multiple persons, as well as engagement between persons themselves. Based on ROS4HRI engagement https://github.com/ros4hri/hri_engagement.
 
 ## Overview
 
@@ -14,13 +14,9 @@ The system computes engagement based on:
 
 ## Key Features
 
-- ✅ Robot-to-person engagement tracking
-- ✅ Person-to-person engagement tracking
-- ✅ Person-to-tablet engagement tracking
-- ✅ Multi-user scene analysis
-- ✅ Separate engagement histories per target (no robot detection bias)
-- ✅ State machine with hysteresis (UNKNOWN → DISENGAGED → ENGAGING → ENGAGED → DISENGAGING)
-- ✅ Single consolidated topic for all engagement data
+- Robot-to-person engagement tracking
+- Person-to-person engagement tracking
+- Person-to-tablet engagement tracking
 
 ---
 
@@ -405,117 +401,6 @@ The node automatically subscribes to HRI topics via `pyhri`:
 └─────────────────────────────────────────────┘
 ```
 
----
-
-## Example Use Cases
-
-### 1. Robot Interaction Priority
-
-"Who should the robot talk to?"
-
-```python
-# Subscribe to /humans/engagement/multiuser
-# For each person where level == ENGAGED and primary_target == "robot":
-#   Add to priority queue
-# Select person with highest max_score
-```
-
-### 2. Social Group Detection
-
-"Are these people talking to each other?"
-
-```python
-# Check if person A's primary_target == person B's ID
-# AND person B's primary_target == person A's ID
-# → Mutual engagement = conversation
-```
-
-### 3. Attention Management
-
-"Should the robot interrupt?"
-
-```python
-# If person's primary_target != "robot":
-#   Person is engaged with someone else
-#   → Do not interrupt
-```
-
----
-
-## Debugging
-
-### Visualization
-
-Use the `search_all_persons.py` script:
-
-```bash
-./search_all_persons.py --print-interval 5.0
-```
-
-Output:
-```
-──────────────────────────────────────────────
-👤 Person ID: person_abc
-──────────────────────────────────────────────
-  📊 Engagement Status: 🟢 ENGAGED
-  🤝 Engaged with: robot (score: 0.78)
-  📊 All engagement scores:
-      🟢 robot: 0.78
-      ⚪ person_xyz: 0.23
-      ⚪ person_def: 0.15
-```
-
-### ROS2 CLI
-
-Monitor the engagement topic:
-```bash
-ros2 topic echo /humans/engagement/multiuser
-```
-
-Check engagement rate:
-```bash
-ros2 topic hz /humans/engagement/multiuser
-```
-
----
-
-## Troubleshooting
-
-### No engagement detected
-
-**Possible causes:**
-1. **No gaze transforms** - Check face detection is working
-2. **Distance too large** - Person beyond `max_distance` parameter
-3. **Outside FOV** - Person not in field of view
-4. **Transform issues** - Check TF tree
-
-**Debug:**
-```bash
-# Check if faces are detected
-ros2 topic list | grep face
-
-# Check gaze transforms
-ros2 topic echo /humans/persons/person_abc/face/gaze
-
-# Check TF tree
-ros2 run tf2_tools view_frames.py
-```
-
-### Robot always wins
-
-This should no longer happen with the per-target history approach. If it does:
-- Adjust `engagement_threshold` (lower = easier to engage)
-- Check `field_of_view` parameter
-- Verify person-person transforms are valid
-
-### Engagement oscillating
-
-Increase `observation_window` for more stability:
-```bash
-observation_window:=15.0  # Default is 10.0
-```
-
----
 
 ## References
 
@@ -540,4 +425,4 @@ Apache License 2.0
 
 ## Maintainer
 
-PAL Robotics (<severin.lemaignan@pal-robotics.com>)
+PAL Robotics (<bartomeu.pou@iiia.csic.es>)
